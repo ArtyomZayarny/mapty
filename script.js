@@ -15,9 +15,21 @@ const inputElevation = document.querySelector(".form__input--elevation");
 function onSuccess(position) {
   const { latitude, longitude } = position.coords;
   console.log(`https://www.google.com/maps/@${latitude},${longitude}`);
+
+  const map = L.map('map').setView([latitude, longitude], 10);
+
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+  }).addTo(map);
+
+  L.marker([latitude,longitude]).addTo(map)
+      .bindPopup('A pretty CSS popup.<br> Easily customizable.')
+      .openPopup();
 }
 function onError() {
   alert("Could not get your location");
 }
 console.log(navigator);
 navigator.geolocation.getCurrentPosition(onSuccess, onError);
+
+
