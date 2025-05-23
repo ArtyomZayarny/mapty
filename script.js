@@ -25,6 +25,21 @@ function onSuccess(position) {
   L.marker([latitude,longitude]).addTo(map)
       .bindPopup('A pretty CSS popup.<br> Easily customizable.')
       .openPopup();
+
+  //Add click event for map
+  map.on('click', (mapEvent) => {
+    console.log(mapEvent);
+    const { lat, lng } = mapEvent.latlng;
+    L.marker([lat,lng]).addTo(map).bindPopup(L.popup({
+      maxWidth:250,
+      minWidth:100,
+      autoClose:false,
+      closeOnClick: false,
+      className:'running-popup'
+    }))
+        .setPopupContent('Workout')
+        .openPopup();
+  })
 }
 function onError() {
   alert("Could not get your location");
