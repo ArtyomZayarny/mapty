@@ -101,14 +101,18 @@ class App {
     inputDistance.value = inputDuration.value = inputCadence.value = inputElevation.value = '';
   }
   renderWorkoutMarker(workout) {
-      L.marker(workout.coords).addTo(this.#map).bindPopup(L.popup({
-        maxWidth:250,
-        minWidth:100,
-        autoClose:false,
-        closeOnClick: false,
-        className:`${workout.type}-running-popup`
-      }))
-        .setPopupContent(workout.distance)
+      L.marker(workout.coords)
+          .addTo(this.#map)
+          .bindPopup(
+              L.popup({
+                maxWidth:250,
+                minWidth:100,
+                autoClose:false,
+                closeOnClick: false,
+                className:`${workout.type}-popup`
+               })
+          )
+        .setPopupContent('Workout')
         .openPopup();
   }
 }
